@@ -47,11 +47,11 @@ const App = () => {
       ]
     }
   ]
-
+// modification
   return (
     <div>
       <h1>Web developpemnt curriculum</h1>
-      <Course course={courses} />
+      <Course course={courses} /> 
     </div>
   )
 }
