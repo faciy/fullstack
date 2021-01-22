@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 const App = (props) => {
   const [selected, setSelected] = useState(0);
   const [points, setPoints] = useState(new Array(anecdotes.length).fill(0))
-  const [vote, setVote] = useState([])
+  // const [vote, setVote] = useState([])
 
   const randon = (max, min) => {
     return Math.floor(Math.random() * (max - min + 1) + min)
@@ -15,11 +15,10 @@ const App = (props) => {
     const copy = [...points]
     copy[selected] += 1
     setPoints(copy)
-    if(points[selected] === 7 && selected === 1 ){
-      setVote(vote.concat(props.anecdotes[selected]))
-      
-    }
   }
+
+  const othervote = points.indexOf(Math.max(...points))
+  console.log('othervote', othervote)
  
   return (
     <div>
@@ -31,8 +30,8 @@ const App = (props) => {
         <button onClick={() => setSelected(randon(5, 1))} >next anecdote</button>
       </div>
       <h2>Anecdote with most votes</h2>
-      <p>{vote}</p>
-      <p>has  vote</p>
+      <p>{anecdotes[othervote]}</p>
+      <p>has {points[othervote]} vote</p>
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
-import axios from 'axios'
+// import axios from 'axios'
 import Persons from './components/Persons'
 import personService from './services/person'
 
@@ -91,7 +91,8 @@ const App = () => {
         const id = filterName.filter(val => val.name === newName)[0].id
         const idsearch = persons.find(val => val.id === id)
         const idmodif = { ...idsearch, number: number }
-        axios.put('http://localhost:3001/persons/' + id, idmodif)
+        personService
+        .update(id,idmodif)
           .then(response => {
             setPersons(persons.map(val => val.id !== id ? val : response.data))
             setSuccesMessage(
@@ -117,17 +118,18 @@ const App = () => {
 
   }
 
-  const filterName = persons.filter(filtername => {
-    return filtername.name.toLowerCase().indexOf(search.toLowerCase()) !== -1
+  const filterName = persons.filter(person => {
+    return person.name
   })
 
   const togglePersonOf = (id) => {
     console.log(`importance of ${id} needs to be toggled`)
-    const url = `http://localhost:3001/persons/${id}`
-    console.log('url', url)
+    // const url = `http://localhost:3001/persons/${id}`
+    // console.log('url', url)
     const person = filterName.find(p => p.id === id)
     if (window.confirm('Delete ' + person.name + ' ?')) {
-      axios.delete(url)
+      personService
+      .suppr(id)
         .then(response => {
           setPersons(filterName.filter(p => p.id !== id))
           setSuccesMessage(
