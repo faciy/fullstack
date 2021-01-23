@@ -73,8 +73,8 @@ const App = () => {
       }
       personService
         .create(newObjet)
-        .then(response => {
-          setPersons(persons.concat(response.data))
+        .then(createPerson => {
+          setPersons(persons.concat(createPerson.data))
           setSuccesMessage(
             `Added ${newName}`
           )
@@ -84,6 +84,12 @@ const App = () => {
           setNewName('')
           setNumber('')
         })
+      .catch(error => {
+        setErrorMessage(
+          `Person Validation failed:name:Path 'name'(${newName}) is shorter than the minimum allowed lenght (3)`
+        )
+        console.log(error.response.data)
+      })
 
     } else {
 
@@ -107,7 +113,9 @@ const App = () => {
           .catch(error => {
             setErrorMessage(
               `Note '${newName}' was already removed from server`
+              
             )
+            
             setTimeout(() => {
               setErrorMessage(null)
             }, 5000)
