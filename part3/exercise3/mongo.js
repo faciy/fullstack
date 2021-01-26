@@ -23,8 +23,10 @@ const personSchema = new mongoose.Schema({
 const Person = mongoose.model('Person', personSchema)
 
 const person = new Person({
-  name: 'Charles Oth-Niel',
-  number: '680-60990',
+  // eslint-disable-next-line no-undef
+  name: process.argv[3],
+  // eslint-disable-next-line no-undef
+  number: process.argv[4],
 })
 
 

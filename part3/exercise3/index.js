@@ -1,10 +1,10 @@
 require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 const Person = require('./models/person')
 
-// const morgan = require('morgan') 
+// const morgan = require('morgan')
 
 const app = express()
 
@@ -18,68 +18,50 @@ app.use(express.json())
 
 
 let persons = [
-    {
-        "name": "Arto Hellas",
-        "number": "040-123456",
-        "id": 1
-    },
-    {
-        "name": "Ada Lovelace",
-        "number": "39-44-5323523",
-        "id": 2
-    },
-    {
-        "name": "Dan Abramov",
-        "number": "12-43-234345",
-        "id": 3
-    },
-    {
-        "name": "Mary Poppendieck",
-        "number": "39-23-6423122",
-        "id": 4
-    }
+  {
+    'name': 'Arto Hellas',
+    'number': '040-123456',
+    'id': 1
+  },
+  {
+    'name': 'Ada Lovelace',
+    'number': '39-44-5323523',
+    'id': 2
+  },
+  {
+    'name': 'Dan Abramov',
+    'number': '12-43-234345',
+    'id': 3
+  },
+  {
+    'name': 'Mary Poppendieck',
+    'number': '39-23-6423122',
+    'id': 4
+  }
 ]
 
 
 const url =
-  `mongodb+srv://charlesothiel_2000:charlesothniel@cluster0.1jllf.mongodb.net/persons?retryWrites=true&w=majority`
+  'mongodb+srv://charlesothiel_2000:charlesothniel@cluster0.1jllf.mongodb.net/persons?retryWrites=true&w=majority'
 
-  mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
 
-//   const personSchema = new mongoose.Schema({
-//     name: String,
-//     number: String,
-//   })
-
-
-// console.log('pers', persons)
-
-let date1 = Date();
+let date1 = Date()
 
 app.get('/info', (req, res) => {
-    res.send(`<p>Phonebook has info for ${persons.length} people</p>
+  res.send(`<p>Phonebook has info for ${persons.length} people</p>
   <p>${date1} </p>`)
 })
 
 app.get('/api/persons', (req, res) => {
-    Person.find({}).then(person => {
-        res.json(person)
-    })
+  Person.find({}).then(person => {
+    res.json(person)
+  })
 })
 
-// app.get('/api/persons/:id', (request, response) => {
-    // const id = Number(request.params.id)
-    // console.log(id)
-    // const personne = persons.find(person => person.id === id)
-    // if (personne) {
-    //     response.json(personne)
-    // } else {
-    //     response.status(404).end()
-    // }
-// })
 
 app.get('/api/persons/:id', (request, response, next) => {
-    Person.findById(request.params.id)
+  Person.findById(request.params.id)
     .then(person => {
       if(person){
         response.json(person.toJSON())
@@ -87,15 +69,16 @@ app.get('/api/persons/:id', (request, response, next) => {
         response.status(404).end()
       }
     })
-    .catch(error => next(error))  
-  })
+    .catch(error => next(error))
+})
 
 app.delete('/api/persons/:id', (request, response, next) => {
-   Person.findByIdAndRemove(request.params.id)
-   .then(result => {
-    response.status(204).end()
-  })
-  .catch(error => next(error))
+  Person.findByIdAndRemove(request.params.id)
+    // eslint-disable-next-line no-unused-vars
+    .then(result => {
+      response.status(204).end()
+    })
+    .catch(error => next(error))
 })
 
 
@@ -117,8 +100,8 @@ app.put('/api/notes/:id', (request, response, next) => {
 
 const generateId = () => {
   const maxId = persons.length > 0
-  ? Math.max(...persons.map(n => n.id))
-  : 0
+    ? Math.max(...persons.map(n => n.id))
+    : 0
   console.log('maxId', maxId)
   return maxId + 1
 }
@@ -127,29 +110,30 @@ const generateId = () => {
 app.post('/api/persons', (request, response) => {
   const body = request.body
   console.log('body', body)
-  
+
   if (!body.name || !body.number) {
-    return response.status(400).json({ 
-      error: 'name and number is void' 
+    return response.status(400).json({
+      error: 'name and number is void'
     })
   }
-  if(persons.map(val => val.name).includes(body.name) !=""){
-    return response.status(400).json({ 
-      error: 'name must be unique' 
+  // eslint-disable-next-line eqeqeq
+  if(persons.map(val => val.name).includes(body.name) !=''){
+    return response.status(400).json({
+      error: 'name must be unique'
     })
   }
-  
+
   const person = {
     name: body.name,
     number: body.number,
     id: generateId(),
   }
-  
+
   persons = persons.concat(person)
-  
+
   person.save().then(savedNote => {
     response.json(savedNote)
-})
+  })
 })
 
 const unknownEndpoint = (request, response) => {
@@ -174,7 +158,8 @@ app.use(errorHandler)
 
 
 
+// eslint-disable-next-line no-undef
 const PORT = process.env.PORT
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`)
+  console.log(`Server running on port ${PORT}`)
 })

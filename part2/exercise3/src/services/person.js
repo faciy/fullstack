@@ -18,6 +18,7 @@ const suppr = (id) => {
     return axios.delete(`${baseUrl}/${id}`)
 }
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default { 
     getAll,
     create,
