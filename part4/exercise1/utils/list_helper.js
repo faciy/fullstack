@@ -1,37 +1,27 @@
 const _ = require('lodash')
 
-const dummy = (blogs) => {
-  // console.log('blogs', blogs.length)
-  if(blogs.length === 0){
-    return 1
-  }else{
-    return 0
-  }
-}
 const totalLikes = (blogs) => {
-  const reducer = (sum, item) => {
-    // console.log('object',item)
-    return sum + item.likes
+  const reducer = (sum, blog) => {
+    return sum + blog.likes
   }
-  return blogs.length === 0
-    ? 0
-    : blogs.reduce(reducer, 0)
+
+  return blogs.length === 0 ? 0 : blogs.reduce(reducer, 0)
 }
 
-const favoriteBlog = (blogs) => {
-  const favoriteLike = [...blogs.map(blog => blog.likes)]
-  if (favoriteLike.length === 0){
+const favouriteBlog = (blogs) => {
+  const likes = [...blogs.map((blog) => blog.likes)]
+
+  if (likes.length === 0) {
     return undefined
-  } else{
-    const maxFavoriteLike = Math.max(...favoriteLike)
-    // console.log(maxFavoriteLike)
-    const blogFavorite =  blogs.find(blog => blog.likes === maxFavoriteLike)
-    // console.log(blogFavorite)
-    return {
-      title : blogFavorite.title,
-      author: blogFavorite.author,
-      likes : blogFavorite.likes
-    }
+  }
+
+  const highestLikes = Math.max(...likes)
+  const highestLikedBlog = blogs.find((blog) => blog.likes === highestLikes)
+
+  return {
+    title: highestLikedBlog.title,
+    author: highestLikedBlog.author,
+    likes: highestLikedBlog.likes
   }
 }
 
@@ -41,7 +31,6 @@ const mostBlogs = (blogs) => {
   }
 
   const groupedBlogs = _.groupBy(blogs, 'author')
-  console.log('groupedBlogs', groupedBlogs)
 
   const sortedBlogs = Object.keys(groupedBlogs)
     .map((author) => {
@@ -51,10 +40,7 @@ const mostBlogs = (blogs) => {
       return b.blogs.length - a.blogs.length
     })
 
-  return {
-    author: sortedBlogs[0].author,
-    blogs: sortedBlogs[0].blogs.length
-  }
+  return { author: sortedBlogs[0].author, blogs: sortedBlogs[0].blogs.length }
 }
 
 const mostLikes = (blogs) => {
@@ -63,7 +49,6 @@ const mostLikes = (blogs) => {
   }
 
   const groupedBlogs = _.groupBy(blogs, 'author')
-  // console.log('groupedBlogs', groupedBlogs)
 
   const sortedBlogs = Object.keys(groupedBlogs)
     .map((author) => {
@@ -73,16 +58,12 @@ const mostLikes = (blogs) => {
       return b.likes - a.likes
     })
 
-  return {
-    author: sortedBlogs[0].author,
-    likes: sortedBlogs[0].likes
-  }
+  return { author: sortedBlogs[0].author, likes: sortedBlogs[0].likes }
 }
 
 module.exports = {
-  dummy,
   totalLikes,
-  favoriteBlog,
+  favouriteBlog,
   mostBlogs,
   mostLikes
 }
