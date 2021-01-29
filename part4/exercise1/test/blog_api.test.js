@@ -54,7 +54,7 @@ describe('when fethcing notes', () => {
   })
 })
 
-describe('when creating notes', () => {
+describe('when creating blogs', () => {
   test('a valid blog can be added', async () => {
     const newBlog = helper.validBlog
 

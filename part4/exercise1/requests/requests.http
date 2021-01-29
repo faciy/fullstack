@@ -1,4 +1,4 @@
-@baseUrl = http://localhost:3003
+@baseUrl = http://localhost:3001
 
 ###
 GET {{baseUrl}}/api/blogs
@@ -6,7 +6,7 @@ GET {{baseUrl}}/api/blogs
 ###
 POST {{baseUrl}}/api/blogs
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFhcm9uIiwiaWQiOiI1ZTg5NDQyNTM5YWE5ZDFlZGI2ZDEwMzEiLCJpYXQiOjE1ODYwNTczNzJ9.fz55rRAgSoArOUEM0aRTCQe3jKoGuyuGVLgBEvfr50U
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNoYXJsZXMiLCJpZCI6IjYwMTQxZTI5NzA0NzZmMmExNjgzMjI0MSIsImlhdCI6MTYxMTkzMTI1Mn0.LvlCmScYWgOf7MH7joTUWDu0AtOon6Iw8kii7HR4bIg
 
 {
   "title": "Test",
@@ -35,5 +35,5 @@ Content-Type: application/json
 ###
 DELETE {{baseUrl}}/api/blogs/5e8957483d352b330c109e4c
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFhcm9uIiwiaWQiOiI1ZTg5NDQyNTM5YWE5ZDFlZGI2ZDEwMzEiLCJpYXQiOjE1ODYwNTczNzJ9.fz55rRAgSoArOUEM0aRTCQe3jKoGuyuGVLgBEvfr50U
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNoYXJsZXMiLCJpZCI6IjYwMTQxZTI5NzA0NzZmMmExNjgzMjI0MSIsImlhdCI6MTYxMTkzMTI1Mn0.LvlCmScYWgOf7MH7joTUWDu0AtOon6Iw8kii7HR4bIg
 

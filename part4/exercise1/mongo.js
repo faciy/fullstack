@@ -16,18 +16,18 @@ const url =
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
 
 const blogSchema = new mongoose.Schema({
-    title: String,
-    author: String,
-    url: String,
-    likes: Number
+  title: String,
+  author: String,
+  url: String,
+  likes: Number
 })
 const Blog = mongoose.model('Blog', blogSchema)
 
 const blog = new Blog({
-    title: process.argv[3],
-    author: process.argv[4],
-    url: process.argv[5],
-    likes: process.argv[6]
+  title: process.argv[3],
+  author: process.argv[4],
+  url: process.argv[5],
+  likes: process.argv[6]
 })
 
 
