@@ -15,12 +15,11 @@ beforeEach(async () => {
   await Promise.all(promiseArray)
 
   const response = await await api.post('/api/login/').send({
-    username: 'charlesothiel_2000',
-    password: 'charlesothniel'
+    username: 'root',
+    password: 'secret'
   })
 
   token = response.body.token
-  console.log('token',token)
 })
 
 describe('when fethcing notes', () => {
@@ -61,6 +60,7 @@ describe('when creating notes', () => {
 
     await api
       .post('/api/blogs')
+      .set('Authorization', `bearer ${token}`)
       .send(newBlog)
       .expect(201)
       .expect('Content-Type', /application\/json/)

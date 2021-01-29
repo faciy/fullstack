@@ -93,6 +93,7 @@ const blogWithoutTitle = {
 
 const blogsInDb = async () => {
   const blogs = await Blog.find({})
+  console.log('mapblog', blogs.map((blog) => blog.toJSON()))
   return blogs.map((blog) => blog.toJSON())
 }
 
