@@ -4,6 +4,7 @@ import blogService from './services/blogs'
 import loginService from './services/login'
 import BlogForm from './components/BlogForm'
 import LoginForm from './components/LoginForm'
+import Togglable from './components/Togglable'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -46,6 +47,8 @@ const handleLogin = async ( username,password) => {
       }, 5000)
   }
 }
+
+
 
 const handleCreate = async ( title, author, url) => {
   // e.preventDefault()
@@ -100,11 +103,13 @@ const handleDeconnect = () => {
       </button>
       <div>
         <h1>create a new blog</h1>
-        <BlogForm handleCreate={handleCreate} />
+        <Togglable buttonLabel='new note' >
+          <BlogForm handleCreate={handleCreate} />
+        </Togglable>
       </div>
       <br />
       {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
+        <Blog  key={blog.id} blog={blog} />
       )}
     </div>
   )
