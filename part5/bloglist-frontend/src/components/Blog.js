@@ -1,13 +1,29 @@
 import React, {useState} from 'react'
 import blogService from '../services/blogs'
 
-const Blog = ({  blog }) => {
+const Blog = ({  user, blog, removeBlog }) => {
+  console.log('userOne',user)
     const [showblog, setShowblog] = useState(false)
     const [likes, setLikes] = useState(blog.likes)
 
     const toggleVisibility = () => {
         setShowblog(!showblog);
     }
+
+    
+  const showDeleteIfCorrectUser = () => {
+    if (blog.user.id) {
+      return (
+        <div>
+          <button type="button" onClick={() => removeBlog(blog)}>
+            Delete
+          </button>
+        </div>
+      );
+    }
+
+    return null;
+  };
 
     const incrementLikes = async () => {
         const newBlog = {
@@ -55,7 +71,8 @@ const Blog = ({  blog }) => {
                 like
             </button>
       </div>
-      <div>{blog.author}</div>
+      <div>{blog.user.name}</div>
+      {showDeleteIfCorrectUser()}
     </div>
       )
 }

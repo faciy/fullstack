@@ -66,6 +66,20 @@ const handleCreate = async ( title, author, url) => {
   }
 }
 
+const handleDeleteBlog = async (blog) => {
+  if (window.confirm(`Are you sure you want to delete blog "${blog.title}"?`))
+    try {
+      await blogService.remove(blog.id);
+      setBlogs(await blogService.getAll());
+     
+    } catch (exception) {
+      console.log('erreur')
+    }
+};
+
+
+
+
 const handleDeconnect = () => {
   window.localStorage.removeItem('loggedBlogAppUser');
   setErrorMessage(`${user.username} has been logged out`);
@@ -109,7 +123,7 @@ const handleDeconnect = () => {
       </div>
       <br />
       {blogs.map(blog =>
-        <Blog  key={blog.id} blog={blog} />
+        <Blog  key={blog.id} blog={blog} user={user}  removeBlog={handleDeleteBlog} />
       )}
     </div>
   )
