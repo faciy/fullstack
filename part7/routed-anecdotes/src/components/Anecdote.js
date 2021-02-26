@@ -1,7 +1,9 @@
 import React from "react";
 
-const Anecdote = ({ anecdote, vote }) => (
-  <>
+const Anecdote = ({ anecdote, vote }) => {
+  // console.log('anecdote',anecdote)
+  return (
+    <>
     {!anecdote && <p>Anecdote does not exist</p>}
 
     {anecdote && (
@@ -24,6 +26,7 @@ const Anecdote = ({ anecdote, vote }) => (
       </div>
     )}
   </>
-);
+  )
+};
 
 export default Anecdote;

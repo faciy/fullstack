@@ -35,7 +35,7 @@ const App = () => {
       anecdote.content.length > 45
         ? anecdote.content.slice(0, 44) + "..."
         : anecdote.content;
-    setNotification(`Added "${contentToShow}"`);
+    setNotification(`a new anecdote "${contentToShow}" created`);
     setTimeout(() => {
       setNotification("");
     }, 10000);
